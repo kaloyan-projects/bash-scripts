@@ -1,4 +1,4 @@
-# bash-scripts
+# Bash scripts
 Collection of bash scripts
 
 # How to use
