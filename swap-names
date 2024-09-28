@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if exactly two files are selected
+if [ "$#" -ne 2 ]; then
+  zenity --error --text "Моля, изберете точно два файла."
+  exit 1
+fi
+
+# Get the names of the selected files
+file1="$1"
+file2="$2"
+
+# Swap the names
+mv "$file1" "$file1.swap_temp"
+mv "$file2" "$file1"
+mv "$file1.swap_temp" "$file2"
+
+zenity --info --text "Разменени файлове: $file1 и $file2"
+
