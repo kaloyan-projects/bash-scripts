@@ -1,0 +1,67 @@
+#!/bin/bash
+
+declare -a items
+declare -a weights
+
+parse_arguments() {
+	# if weighted
+	if [[ (($1 == -w || $1 == --weighted)) ]]; then
+		# take items
+		for ((i = 2; i <= $#; i += 2)); do
+			items+=("${!i}")
+		done
+		# take weights
+		for ((i = 3; i <= $#; i += 2)); do
+			weights+=("${!i}")
+		done
+    elif [[ (($1 == -h || $1 == --help)) ]]; then
+        echo "Употреба: pick [-w ПРЕТЕГЛЯНЕ]… ЕЛЕМЕНТ… [ТЕЖЕСТ]…"
+        echo "Избиране на случаен низ."
+        echo "Незадължителни аргументи:"
+        echo "  -w, --weighted          Задаване на стойности по двойка (ЕЛЕМЕНТ, ТЕЖЕСТ)"
+        echo "                          При липса на такъв аргумент, всички аргументи"
+        echo "                          се приемат за елементи за избор"
+        echo "  -h, --help              Изписване на тези инструкции"
+        exit
+	else
+		# take items
+		items=("$@")
+		# set weights
+		for ((i = 0; i < "${#items[@]}"; i++ )); do
+			weights+=(1)
+		done
+	fi
+	# if not every item has a weight
+	if [[ ${#weights[@]} -ne ${#items[@]} ]]; then
+		echo "Неправилен брой аргументи."
+		exit
+	fi
+}
+
+pick_random_item() {
+    local total_weight=0
+    local selected_index=-1
+
+    # Calculate the total weight
+    for weight in "${weights[@]}"; do
+        ((total_weight += weight))
+    done
+
+    # Generate a random number within the total weight range
+    local random_num=$((RANDOM % total_weight))
+
+    # Select the item based on the random number
+    for i in "${!items[@]}"; do
+        ((random_num -= weights[i]))
+        if ((random_num < 0)); then
+            selected_index=$i
+            break
+        fi
+    done
+
+    # Output the selected item
+    echo "${items[selected_index]}"
+}
+
+parse_arguments "$@"
+echo $(pick_random_item)
