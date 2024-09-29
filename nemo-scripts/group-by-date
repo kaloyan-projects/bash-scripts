@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Check if there are selected files
+
+if [ "$#" -eq 0 ]; then
+    zenity --error --text="Няма избрани файлове!"
+    exit 1
+fi
+
+# Loop through each file
+for file in "$@"; do
+    if [ -f "$file" ]; then
+        # Get file creation date
+        creation_date=$(stat --format='%w' "$file" | cut -d ' ' -f1)
+        # Get modification date if no creation date
+        if [ "$creation_date" == "-" ]; then
+            creation_date=$(stat --format='%y' "$file" | cut -d ' ' -f1)
+        fi
+        # Get year and month
+        year=$(date -d "$creation_date" +'%Y')
+        month=$(date -d "$creation_date" +'%m')
+
+        # Create directories
+        target_dir="./${year}/${month}"
+        mkdir -p "$target_dir"
+
+        # Move file to directory
+        mv "$file" "$target_dir"
+    fi
+done
+
+zenity --info --text="Избраните файлове са групирани по дата."
+        
