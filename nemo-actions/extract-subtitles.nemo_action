@@ -1,0 +1,10 @@
+[Nemo Action]
+Name=Extract subtitles
+Name[bg]=Изваждане на субтитри
+Comment=Extract subtitles from video file
+Comment[bg]=Изваждане на субтитри от видео файл
+Exec=<extract-subtitles.sh %F>
+Selection=notnone
+Icon-Name=video
+Extensions=mkv;avi;mp4;
+Dependencies=ffmpeg
