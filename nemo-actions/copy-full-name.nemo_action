@@ -1,0 +1,9 @@
+[Nemo Action]
+Name=Copy full path
+Name[bg]=Копирай път
+Comment=Copy the full path to the file, including its name
+Comment[bg]=Копирай целия път до файла, включително името му.
+Exec=sh -c 'echo -n %F | xclip -selection clipboard'
+Selection=single
+Icon-Name=edit-copy
+Extensions=any;
