@@ -14,7 +14,6 @@ parse_arguments() {
 		for ((i = 3; i <= $#; i += 2)); do
 			weights+=("${!i}")
 		done
-    # print help
     elif [[ (($1 == -h || $1 == --help)) ]]; then
         echo "Употреба: pick [-w ПРЕТЕГЛЯНЕ]… ЕЛЕМЕНТ… [ТЕЖЕСТ]…"
         echo "Избиране на случаен низ."
