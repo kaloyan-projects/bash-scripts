@@ -1,0 +1,10 @@
+[Nemo Action]
+Name=Copy video length
+Name[bg]=Копирай дължина на видео
+Comment=Copy total length of selected video files to clipboard
+Comment[bg]=Копира общата дължина на видео в буферната памет
+Exec=<copy-length-to-clipboard.sh %F>
+Selection=notnone
+Icon-Name=appointment-new
+Extensions=mp4;avi;mkv;
+Dependencies=ffmpeg
