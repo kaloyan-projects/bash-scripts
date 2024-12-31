@@ -20,4 +20,5 @@ For actions for the Nemo file manager, place in ~/.local/share/nemo/actions
 4. [copy-path](nemo-scripts/copy-path) – Copies path to selected file to clipboard.
 ## Nemo actions
 5. [copy-full-path](nemo-actions/copy-full-path.nemo_action) – Copies path to selected file to clipboard.
-6. [extract-subtitles](nemo-actions/extract-subtitles.sh) – Extracts all subtitle tracks of the selected video files.
+6. [extract-subtitles](nemo-actions/extract-subtitles.sh) – Extracts all subtitle tracks of the selected video files. Works only on video formats.
+7. [copy-length-to-clipboard](nemo-actions/copy-length-to-clipboard.sh) – Copies the total length of all selected videos to the cipboard. Works only on video formats.
